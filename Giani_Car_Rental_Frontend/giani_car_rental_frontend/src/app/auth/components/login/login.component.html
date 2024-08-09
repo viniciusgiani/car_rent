@@ -1,0 +1,38 @@
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title text-center">Login</h2>
+          
+          <div *ngIf="message" class="alert alert-{{message.type}}" role="alert">
+            {{message.text}}
+          </div>
+
+          <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <div class="form-group mb-3">
+              <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email">
+              <div *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)" class="text-danger">
+                <div *ngIf="loginForm.controls['email'].errors?.['required']">Email is required.</div>
+                <div *ngIf="loginForm.controls['email'].errors?.['email']">Enter a valid email.</div>
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password">
+              <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)" class="text-danger">
+                <div *ngIf="loginForm.controls['password'].errors?.['required']">Password is required.</div>
+              </div>
+            </div>
+            <div class="text-center mb-3">
+              <button type="submit" class="btn btn-block" style="background-color: #b83535; color: white;" [disabled]="loginForm.invalid">Login</button> 
+            </div>
+          </form>
+          <p class="text-center mt-3">
+            Or <a [routerLink]="['/register']">Register now!</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

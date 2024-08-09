@@ -1,0 +1,81 @@
+<div class="container mt-4" *ngIf="car">
+
+  <div *ngIf="message" class="alert" [ngClass]="{'alert-success': message.type === 'success', 'alert-danger': message.type === 'error'}" role="alert">
+    {{ message.text }}
+  </div>
+
+  <div class="row align-items-start mb-3 p-3 border rounded shadow-sm bg-white">
+    <div class="col-md-4">
+      <img class="img-fluid rounded" style="height: 130px; width: 100%; object-fit: cover; cursor: pointer;" 
+           [src]="processedImage" alt="profile" (click)="openImageModal(processedImage)" />
+    </div>
+    <div class="col-md-8 d-flex flex-column">
+      <div class="d-flex flex-column h-100">
+        <div class="flex-grow-1">
+          <h2 style="cursor: pointer; color: #b83535;">
+            {{car.brand}} {{car.name}}
+          </h2>
+          <p>{{car.description}}</p>
+          <hr>
+          <h5>Price: <b>${{car.price}}</b> - Color: <b>{{car.color}}</b> - Transmission: <b>{{car.transmission}}</b> - Type: <b>{{car.type}}</b> - Year: <b>{{car.year}}</b></h5>
+          <hr>
+        </div>
+        <div class="d-flex justify-content-end mt-auto">
+          <button [routerLink]="['/customer/book', car.id]" class="btn btn-warning" id=book>Book Car</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <div class="spinner-border text-primary" role="status" *ngIf="isSpinning">
+      </div>
+    </div>
+  </div>
+  <form [formGroup]="validateForm" (ngSubmit)="onSubmit()">
+    <div class="row mb-3">
+      <div class="col-md-6 offset-md-3">
+        <div class="form-group row">
+          <label for="fromDate" class="col-sm-2 col-form-label">From Date</label>
+          <div class="col-sm-10">
+            <input
+              type="date"
+              id="fromDate"
+              formControlName="fromDate"
+              class="form-control"
+              placeholder="From Date"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6 offset-md-3">
+        <div class="form-group row">
+          <label for="toDate" class="col-sm-2 col-form-label">To Date</label>
+          <div class="col-sm-10">
+            <input
+              type="date"
+              id="toDate"
+              formControlName="toDate"
+              class="form-control"
+              placeholder="To Date"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <button type="submit" class="btn btn-primary">Book Car</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+</div>
+
+<app-image-modal #imageModal></app-image-modal>

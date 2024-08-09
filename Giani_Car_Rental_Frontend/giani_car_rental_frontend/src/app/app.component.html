@@ -1,0 +1,52 @@
+<nav *ngIf="!isAdminLoggedIn && !isCustomerLoggedIn" class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand text-light" [routerLink]="['/']" style="cursor:pointer;">Giani Car Rental</a>
+    <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavNonAuth" aria-controls="navbarNavNonAuth" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon custom-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavNonAuth">
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link text-light me-4" [routerLink]="['/login']">Login</a>
+        <a class="nav-link text-light me-4" [routerLink]="['/register']">Sign Up</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<nav *ngIf="isAdminLoggedIn" class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand text-light" [routerLink]="['/admin/dashboard']">Admin</a>
+    <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAdmin" aria-controls="navbarNavAdmin" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon custom-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAdmin">
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link text-light me-4" [routerLink]="['/admin/car']">Post Car</a>
+        <a class="nav-link text-light me-4" [routerLink]="['/admin/dashboard']">Dashboard</a>
+        <a class="nav-link text-light me-4" [routerLink]="['/admin/bookings']">Bookings</a>
+        <a class="nav-link text-light me-4" [routerLink]="['/admin/search']">Search</a>
+        <a class="nav-link text-light me-4" (click)="logout()" style="cursor:pointer;">Logout</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<nav *ngIf="isCustomerLoggedIn" class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand text-light" [routerLink]="['/customer/dashboard']">Customer</a>
+    <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavCustomer" aria-controls="navbarNavCustomer" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon custom-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavCustomer">
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link text-light me-4" [routerLink]="['/customer/dashboard']">Dashboard</a>
+        <a class="nav-link text-light me-4" [routerLink]="['/customer/my_bookings']">My Bookings</a>
+        <a class="nav-link text-light me-4" [routerLink]="['/customer/car/search']">Search</a>
+        <a class="nav-link text-light me-4" (click)="logout()" style="cursor:pointer;">Logout</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
+

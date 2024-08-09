@@ -1,0 +1,79 @@
+<div class="container mt-5 mb-5">
+  <div *ngIf="message" class="alert alert-{{ message.type }} mt-3">
+    {{ message.text }}
+  </div>
+  <div class="card">
+    <div class="card-header text-center text-light">
+      <h2>Search Car</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="searchCarForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="brand">Select a Brand Name:</label>
+          <select class="form-control mb-3" id="brand" formControlName="brand">
+            <option>BMW</option>
+            <option>Audi</option>
+            <option>Ferrari</option>
+            <option>Fiat</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="type">Select a Type:</label>
+          <select class="form-control mb-3" id="type" formControlName="type">
+            <option>Oil</option>
+            <option>Hybrid</option>
+            <option>Diesel</option>
+            <option>Electric</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="transmission">Select a Transmission:</label>
+          <select class="form-control mb-3" id="transmission" formControlName="transmission">
+            <option>Automatic</option>
+            <option>Manual</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="color">Select a Color:</label>
+          <select class="form-control mb-3" id="color" formControlName="color">
+            <option>Red</option>
+            <option>Blue</option>
+            <option>Black</option>
+            <option>White</option>
+            <option>Silver</option>
+          </select>
+        </div>
+        <div class="d-flex justify-content-center"  *ngIf="!isSpinning">
+          <button type="submit" class="btn" [disabled]="searchCarForm.invalid" style="background-color: #b83535; color: white;">Search</button>
+        </div>
+        <div class="spinner-border text-primary" role="status" *ngIf="isSpinning">
+          <span class="visually-hidden"></span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row" *ngFor="let car of cars">
+    <div class="col-md-6">
+      <img class="img-fluid" [src]="car.processedImg" alt="profile">
+      <h2>{{ car.brand }} {{ car.name }}</h2>
+      <p>{{ car.description }}</p>
+      <hr>
+      <h5 class="d-flex flex-column mb-1">
+        <p class="mb-0">Price: <b>${{ car.price }}</b></p>
+        <p class="mb-0">Color: <b>{{ car.color }}</b></p>
+        <p class="mb-0">Transmission: <b>{{ car.transmission }}</b></p>
+        <p class="mb-0">Type: <b>{{ car.type }}</b></p>
+        <p class="mb-0">Year: <b>{{ car.year | date: 'yyyy' }}</b></p>
+      </h5>
+      <hr>
+    </div>
+  </div>
+</div> 
+
+
+
+

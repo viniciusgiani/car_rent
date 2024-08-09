@@ -1,0 +1,54 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title text-center">Sign Up</h2>
+          
+          <div *ngIf="message" class="alert alert-{{message.type}}" role="alert">
+            {{message.text}}
+          </div>
+
+          <form [formGroup]="signupForm" (ngSubmit)="register()">
+            <div class="form-group mb-3">
+              <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email">
+              <div *ngIf="signupForm.controls['email'].invalid && (signupForm.controls['email'].dirty || signupForm.controls['email'].touched)" class="text-danger">
+                <div *ngIf="signupForm.controls['email'].errors?.['required']">Email is required.</div>
+                <div *ngIf="signupForm.controls['email'].errors?.['email']">Enter a valid email.</div>
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password">
+              <div *ngIf="signupForm.controls['password'].invalid && (signupForm.controls['password'].dirty || signupForm.controls['password'].touched)" class="text-danger">
+                <div *ngIf="signupForm.controls['password'].errors?.['required']">Password is required.</div>
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" formControlName="checkPassword">
+              <div *ngIf="signupForm.controls['checkPassword'].invalid && (signupForm.controls['checkPassword'].dirty || signupForm.controls['checkPassword'].touched)" class="text-danger">
+                <div *ngIf="signupForm.controls['checkPassword'].errors?.['required']">Confirmation password is required.</div>
+                <div *ngIf="signupForm.controls['checkPassword'].errors?.['confirm']">Passwords must match.</div>
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <input type="text" class="form-control" id="name" placeholder="Name" formControlName="name">
+              <div *ngIf="signupForm.controls['name'].invalid && (signupForm.controls['name'].dirty || signupForm.controls['name'].touched)" class="text-danger">
+                <div *ngIf="signupForm.controls['name'].errors?.['required']">Name is required.</div>
+              </div>
+            </div>
+            <div class="text-center mb-3">
+              <button type="submit" class="btn btn-block" style="background-color: #b83535; color: white;" [disabled]="signupForm.invalid">Register</button> 
+            </div>
+          </form>
+          <p class="text-center mt-3">
+            Or <a [routerLink]="['/login']">login now!</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+  
+  

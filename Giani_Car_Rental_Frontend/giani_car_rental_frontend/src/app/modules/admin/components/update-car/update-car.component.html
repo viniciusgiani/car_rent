@@ -1,0 +1,107 @@
+<div class="container mt-5 mb-5">
+  <div class="card">
+    <div class="card-header text-center text-light">
+      <h2>Post Car</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="updateCarForm" (ngSubmit)="onSubmit()">
+        <img class="img-fluid rounded" style="height: 130px; width: 100%; object-fit: cover; cursor: pointer;" 
+        [src]="existingImage" alt="Car Image" (click)="openImageModal(existingImage)" 
+        />
+        <div class="form-group">
+          <label for="file">Choose File: </label>
+          <input type="file" class="form-control-file m-lg-3" id="file" (change)="onFileSelected($event)" accept=".jpg,.jpeg,.png">
+          <div *ngIf="updateCarForm.get('file')?.invalid && updateCarForm.get('file')?.touched" class="text-danger">
+            File is required and must be a .jpg, .jpeg, or .png.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="brand">Select a Brand Name</label>
+          <select class="form-control mb-3" id="brand" formControlName="brand">
+            <option>BMW</option>
+            <option>Audi</option>
+            <option>Ferrari</option>
+            <option>Fiat</option>
+            <option>Other</option>
+          </select>
+          <div *ngIf="updateCarForm.get('brand')?.invalid && updateCarForm.get('brand')?.touched" class="text-danger">
+            Brand is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control mb-3" id="name" formControlName="name" placeholder="Ex: Uninho">
+          <div *ngIf="updateCarForm.get('name')?.invalid && updateCarForm.get('name')?.touched" class="text-danger">
+            Name is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="type">Select a Type</label>
+          <select class="form-control mb-3" id="type" formControlName="type">
+            <option>Oil</option>
+            <option>Hybrid</option>
+            <option>Diesel</option>
+            <option>Electric</option>
+          </select>
+          <div *ngIf="updateCarForm.get('type')?.invalid && updateCarForm.get('type')?.touched" class="text-danger">
+            Type is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="transmission">Select a Transmission</label>
+          <select class="form-control mb-3" id="transmission" formControlName="transmission">
+            <option>Automatic</option>
+            <option>Manual</option>
+          </select>
+          <div *ngIf="updateCarForm.get('transmission')?.invalid && updateCarForm.get('transmission')?.touched" class="text-danger">
+            Transmission is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="color">Select a Color</label>
+          <select class="form-control mb-3" id="color" formControlName="color">
+            <option>Red</option>
+            <option>Blue</option>
+            <option>Black</option>
+            <option>White</option>
+            <option>Silver</option>
+          </select>
+          <div *ngIf="updateCarForm.get('color')?.invalid && updateCarForm.get('color')?.touched" class="text-danger">
+            Color is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="year">Model Year</label>
+          <input type="number" class="form-control mb-3" id="year" formControlName="year" placeholder="Ex: 2040">
+          <div *ngIf="updateCarForm.get('year')?.invalid && updateCarForm.get('year')?.touched" class="text-danger">
+            Year is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input type="number" class="form-control mb-3" id="price" formControlName="price" placeholder="Ex: 20000">
+          <div *ngIf="updateCarForm.get('price')?.invalid && updateCarForm.get('price')?.touched" class="text-danger">
+            Price is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea class="form-control mb-3" id="description" formControlName="description" placeholder="Ex: Perfect conditions..."></textarea>
+          <div *ngIf="updateCarForm.get('description')?.invalid && updateCarForm.get('description')?.touched" class="text-danger">
+            Description is required.
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn" [disabled]="updateCarForm.invalid" style="background-color: #b83535; color: white;">Submit</button>
+        </div>
+        <div *ngIf="message" class="alert alert-{{ message.type }} mt-3">
+          {{ message.text }}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<app-image-modal #imageModal></app-image-modal>
+
+
